@@ -40,4 +40,18 @@ public class SortedList extends List {
 
         return true;
     }
+
+    public List mergeLists(List firstList, List secondList) {
+        List list = new SortedList();
+
+        for (Node node = firstList.head; node != null; node = node.next) {
+            list.insert(node.data);
+        }
+
+        for (Node node = secondList.head; node != null; node = node.next) {
+            list.insert(node.data);
+        }
+
+        return list;
+    }
 }

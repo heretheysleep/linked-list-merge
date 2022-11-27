@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class List {
     protected Node head;
 
@@ -28,7 +30,7 @@ public class List {
         return head == null;
     }
 
-    public void push(int data) {
+    public void insert(int data) {
         Node node = new Node(data);
         node.next = head;
         head = node;
@@ -92,7 +94,7 @@ public class List {
     private String print(Node node) {
         String string = "";
 
-        string += node;
+        string += node.data;
 
         if (node.next == null) {
             string += "]";
@@ -119,5 +121,44 @@ public class List {
         }
 
         return 1 + size(node.next);
+    }
+
+    public void fill() {
+        Scanner scanner = new Scanner(System.in);
+        String input = null;
+        int number = 0;
+
+        do {
+            System.out.println("Insira um número ou F/f para Finalizar listagem:");
+            input = scanner.nextLine();
+
+            if (input.toUpperCase().equals("F")) {
+                break;
+            }
+
+            try {
+                number = Integer.parseInt(input);
+            } catch (NumberFormatException ignored) {
+                System.out.println("Entrada inválida.");
+
+                continue;
+            }
+
+            this.insert(number);
+        } while (true);
+    }
+
+    public List mergeLists(List firstList, List secondList) {
+        List list = new List();
+
+        for (Node node = firstList.head; node != null; node = node.next) {
+            list.insert(node.data);
+        }
+
+        for (Node node = secondList.head; node != null; node = node.next) {
+            list.insert(node.data);
+        }
+
+        return list;
     }
 }
